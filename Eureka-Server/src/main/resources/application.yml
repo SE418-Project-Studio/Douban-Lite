@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: eureka-service
+
+server:
+  port: 8761
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+
+zuul:
+  prefix: /api
+  routes:
+    book-catalog-service:
+      path: /book-catalog-service/**
+      service-id: BOOK-CATALOG-SERVICE
+      url: http://localhost:8081
+    book-info-service:
+      path: /book-info-service/**
+      service-id: BOOK-INFO-SERVICE
+      url: http://localhost:8082
+    rating-data-service:
+      path: /rating-data-service/**
+      service-id: RATING_DATA_SERVICE
+      url: http://localhost:8083
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeout-in-milliseconds: 60000
