@@ -1,19 +1,17 @@
 spring:
+  profiles: docker
   application:
     name: book-info-service
 
 server:
   port: 8082
 
-api:
-  key: 15b7a9d7cdcc3bc3fe42316a4b551929
-
 eureka:
+  instance:
+    hostname: book-info-service
+    prefer-ip-address: true
   client:
     register-with-eureka: true
     fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-  instance:
-    hostname: localhost
-    prefer-ip-address: true
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/

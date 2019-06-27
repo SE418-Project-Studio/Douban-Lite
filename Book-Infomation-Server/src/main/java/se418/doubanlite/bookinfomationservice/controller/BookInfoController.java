@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class BookInfoController {
 
-    @Value("${api.key}")
+    @Value("15b7a9d7cdcc3bc3fe42316a4b551929")
     private String apiKey;
 
     @Autowired

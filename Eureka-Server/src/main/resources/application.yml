@@ -1,32 +1,40 @@
 spring:
+  profiles: docker
   application:
-    name: eureka-service
+    name: eureka-server
 
 server:
   port: 8761
 
 eureka:
+  instance:
+    hostname: eureka-server
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 90
+    lease-renewal-interval-in-seconds: 90
   client:
     register-with-eureka: false
     fetch-registry: false
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/
   server:
-    wait-time-in-ms-when-sync-empty: 0
+    enable-self-preservation: false
 
 zuul:
   prefix: /api
   routes:
     book-catalog-service:
       path: /book-catalog-service/**
-      service-id: BOOK-CATALOG-SERVICE
-      url: http://localhost:8081
+      service-id: book-catalog-service
+      url: http://book-catalog-service:8081
     book-info-service:
       path: /book-info-service/**
-      service-id: BOOK-INFO-SERVICE
-      url: http://localhost:8082
+      service-id: book-info-service
+      url: http://book-info-service:8082
     rating-data-service:
       path: /rating-data-service/**
-      service-id: RATING_DATA_SERVICE
-      url: http://localhost:8083
+      service-id: rating-data-service
+      url: http://rating-data-service:8083
 
 hystrix:
   command:
