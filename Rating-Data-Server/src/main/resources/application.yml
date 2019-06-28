@@ -1,5 +1,5 @@
 spring:
-  profiles: docker
+  #profiles: docker
   application:
     name: rating-data-service
 
@@ -8,10 +8,12 @@ server:
 
 eureka:
   instance:
-    hostname: rating-data-service
+    hostname: localhost
+    #hostname: rating-data-service
     prefer-ip-address: true
   client:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://eureka-server:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
+      #defaultZone: http://eureka-server:8761/eureka/

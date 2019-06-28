@@ -30,10 +30,7 @@ public class CatalogController {
         this.ratingDataService = ratingDataService;
     }
 
-    @Autowired
-    private RestTemplate restTemplate;
-
-    /*@HystrixCommand(groupKey = "fallback", commandKey = "fallback", fallbackMethod = "hystrixFallBack")*/
+    @HystrixCommand(groupKey = "fallback", commandKey = "fallback", fallbackMethod = "hystrixFallBack")
     @RequestMapping("/catalog")
     public List<CatalogItem> getCatalog(@Param("userid") String userid) {
 

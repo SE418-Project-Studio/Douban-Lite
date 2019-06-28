@@ -9,6 +9,6 @@ import se418.doubanlite.bootcatalogservice.entity.UserRating;
 public interface RatingDataService {
 
     @RequestMapping("/user/{userid}")
-    public UserRating getUserRatings(@PathVariable("userid") String userid);
+    UserRating getUserRatings(@PathVariable("userid") String userid);
 
 }

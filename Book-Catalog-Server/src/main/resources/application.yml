@@ -1,5 +1,5 @@
 spring:
-  profiles: docker
+  #profiles: docker
   application:
     name: book-catalog-service
 
@@ -8,17 +8,26 @@ server:
 
 eureka:
   instance:
-    hostname: book-catalog-service
+    hostname: localhost
+    #hostname: book-catalog-service
     prefer-ip-address: true
   client:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://eureka-server:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
+      #defaultZone: http://eureka-server:8761/eureka/
 
 feign:
   client:
     config:
       default:
-        connect-timeout: 100000
-        read-timeout: 100000
+        connect-timeout: 999999
+        read-timeout: 999999
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false

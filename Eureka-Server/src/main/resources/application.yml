@@ -1,5 +1,5 @@
 spring:
-  profiles: docker
+  #profiles: docker
   application:
     name: eureka-server
 
@@ -8,15 +8,17 @@ server:
 
 eureka:
   instance:
-    hostname: eureka-server
+    hostname: localhost
+    #hostname: eureka-server
     prefer-ip-address: true
     lease-expiration-duration-in-seconds: 90
     lease-renewal-interval-in-seconds: 90
   client:
-    register-with-eureka: false
-    fetch-registry: false
+    register-with-eureka: true
+    fetch-registry: true
     serviceUrl:
-      defaultZone: http://eureka-server:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
+      #defaultZone: http://eureka-server:8761/eureka/
   server:
     enable-self-preservation: false
 
@@ -26,15 +28,15 @@ zuul:
     book-catalog-service:
       path: /book-catalog-service/**
       service-id: book-catalog-service
-      url: http://book-catalog-service:8081
     book-info-service:
       path: /book-info-service/**
       service-id: book-info-service
-      url: http://book-info-service:8082
     rating-data-service:
       path: /rating-data-service/**
       service-id: rating-data-service
-      url: http://rating-data-service:8083
+  host:
+    socket-timeout-millis: 999999
+    connect-timeout-millis: 999999
 
 hystrix:
   command:
@@ -42,4 +44,8 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeout-in-milliseconds: 60000
+            timeout-in-milliseconds: 999999
+
+ribbon:
+  ReadTimeout: 99999
+  ConnectTimeout: 99999
